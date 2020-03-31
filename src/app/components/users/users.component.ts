@@ -13,12 +13,15 @@ import { selectUserList } from '../../selectors/user.selector';
 })
 export class UsersComponent implements OnInit {
 
+  public displayedColumns: string[] = ['id', 'name', 'cardNumber', 'cardType'];
   public users$ = this._store.pipe(select(selectUserList))
 
   constructor(
     private _store: Store<IAppState>, 
     private _router: Router
-  ) {}
+  ) {
+    this._store.pipe(select(selectUserList))
+  }
 
   public ngOnInit(): void {
     this._store.dispatch(new GetUsers());

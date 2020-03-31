@@ -1,0 +1,36 @@
+<mat-card class="form">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Book name</mat-label>
+      <input matInput name="book" [(ngModel)]="book" placeholder="Book Name" >
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" (click)="addOne(book)" [disabled]="!book">Submit</button>
+</mat-card>
+
+
+
+<div *ngIf="(books$ | async) && keyvalue(books$ | async).length">
+  <table mat-table [dataSource]="keyvalue(books$ | async)" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id + 1}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element"> 
+        <button class="action-button" mat-raised-button color="accent" (click)="deleteOne(element.id, $event)">Delete</button>
+        <button class="action-button" mat-raised-button color="warn">Warn</button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToBook(row.id)"></tr>
+  </table>
+</div>

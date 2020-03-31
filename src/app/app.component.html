@@ -1,17 +1,16 @@
-<nav class="navbar d-flex">
-  <a class="navbar-brand"
-    routerLink="/">
-    Angular - NGRX / {{ (config$ | async)?.adminName }}
-  </a>
-  <div class="d-flex justify-content-end">
-    <ul class="d-flex navbar-nav flex-row align-items-center">
-      <li class="nav-item">
-        <a routerLink="/users"
-          routerLinkActive="active">Users</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<mat-toolbar color="primary">  
+  <mat-toolbar-row>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/users" routerLinkActive="active">Users</button>
+      <button mat-menu-item routerLink="/books" routerLinkActive="active">Books</button>
+    </mat-menu>
+    <span>Angular - NGRX / {{ (config$ | async)?.adminName }}</span>
+  </mat-toolbar-row>
+
+</mat-toolbar>
 <div class="container app-container">
   <router-outlet></router-outlet>
 </div>
